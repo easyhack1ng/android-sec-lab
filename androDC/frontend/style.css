@@ -1,0 +1,509 @@
+:root {
+  --bg: #f6f7f8;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --green: #22c55e;
+  --green-2: #16a34a;
+}
+
+body, html {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.main-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* LEFT SIDEBAR */
+.side-menu {
+  width: 240px;
+  background: var(--card);
+  border-right: 1px solid var(--line);
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fbfbfb;
+}
+
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--green);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+}
+
+.brand-title {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.brand-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.menu-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.05s ease, background 0.2s ease, border 0.2s ease;
+}
+
+.menu-btn:hover {
+  background: #f3f4f6;
+}
+
+.menu-btn:active {
+  transform: translateY(1px);
+}
+
+.menu-btn.primary {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.10);
+  color: var(--green-2);
+}
+
+/* MAIN */
+.content-area {
+  flex: 1;
+  overflow: auto;
+  padding: 18px 18px 22px;
+}
+
+/* 폼 영역도 살짝 카드 느낌으로 */
+.form-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.form-section > div {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 12px;
+  text-align: left;
+}
+
+/* OUTPUT BOX를 "카드"로 */
+.output-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  line-height: 1.35rem;
+}
+
+.device-panel {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+}
+
+.device-header {
+  height: 42px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 8px;
+}
+
+.device-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.device-dot.green { background: #22c55e; }
+.device-dot.yellow { background: #facc15; }
+.device-dot.red { background: #ef4444; }
+
+.device-title {
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.device-screen {
+  flex: 1;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.device-placeholder {
+  color: #9ca3af;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* Output은 보기 좋게 고정 높이 + 스크롤 */
+.output-box {
+  height: 320px;     /* 원하는대로 280~360 */
+  overflow-y: auto;
+}
+
+/* 폰 패널은 작게 고정 */
+.device-panel {
+  height: 320px;     /* Output과 동일하게 맞추면 UI가 고급져짐 */
+}
+
+/* 폰 화면 영역 */
+.device-screen {
+  flex: 1;
+  background: #f3f4f6;
+}
+/* ✅ 남은 화면 높이를 잘 쓰기 위해: 상단 폼 + 여백만큼 뺀 영역을 lower에 할당 */
+.content-area {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 상단 폼(3개 input) 영역은 고정, 아래 영역이 남은 높이를 차지 */
+.form-section {
+  flex: 0 0 auto;
+}
+/* 2컬럼 레이아웃 */
+.lower-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  margin-top: 12px;
+}
+.lower-grid .pane {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Output 카드 */
+/* Output 카드 */
+.panel{
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header{
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.status-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e; /* green point */
+  box-shadow: 0 0 0 4px rgba(34,197,94,0.12);
+}
+
+.panel-title{
+  font-weight: 800;
+  color: #111827;
+  font-size: 13px;
+}
+
+.panel-body{
+  flex: 1;
+  min-height: 0;
+  padding: 12px;
+}
+
+/* Output log area */
+.output-box{
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 10px 12px;
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+  line-height: 1.35rem;
+}
+
+/* Phone shell은 가운데 정렬 + 크기 제한 */
+.pane:last-child{
+  justify-content: center;
+}
+
+.phone-shell{
+  height: 100%;
+  max-height: calc(100vh - 220px); /* 상단 폼/여백 제외 */
+  aspect-ratio: 9 / 19.5;
+  max-width: 360px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+/* 폰이 너무 커져서 침범하는 것 방지 */
+.phone-shell{
+  height: 100%;
+  max-height: calc(100vh - 220px); /* 상단 폼/여백 제외하고 남은 높이 */
+  aspect-ratio: 9 / 19.5;
+  max-width: 360px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ✅ 폰 쉘: 폰처럼 생기게 */
+.phone-shell {
+  height: 100%;               /* 부모 높이 꽉 채움 */
+  aspect-ratio: 9 / 19.5;     /* 폰 비율 유지 */
+  max-height: 100%;
+  width: auto;                /* 비율로 width 결정 */
+  margin: 0 auto;             /* 가운데 정렬 */
+  background: #0b0f14;
+  border-radius: 28px;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 상단 바 + 카메라 */
+.phone-top {
+  height: 46px;
+  position: relative;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0));
+}
+
+.phone-camera {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* 스크린 영역 */
+.phone-screen {
+  flex: 1;
+  background: #f6f7f8;               /* 화이트/그레이 */
+  margin: 10px;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 하단 홈 인디케이터 */
+.phone-bottom {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-indicator {
+  width: 110px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.35);
+}
+
+/* ✅ Output 화면용 내부 스타일 */
+.phone-screen--output {
+  padding: 12px;
+  gap: 10px;
+}
+
+.screen-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.screen-title::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e; /* green point */
+  box-shadow: 0 0 0 4px rgba(34,197,94,0.12);
+}
+
+/* 로그 박스: 폰 스크린 안에서 스크롤 */
+.screen-log {
+  flex: 1;
+  min-height: 0;           /* 중요: flex 스크롤 가능 */
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 0.92rem;
+  line-height: 1.35rem;
+  white-space: pre-wrap;
+}
+
+/* 실제 스크린샷 들어갈 img */
+.phone-shot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none; /* 스크린샷 있을 때만 block으로 바꿈 */
+}
+
+.phone-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-weight: 700;
+  font-size: 14px;
+}
+/* ✅ 오른쪽(폰) 칸을 더 넓게 */
+.output-box{
+  height: clamp(14rem, 38vh, 62vh);
+}
+/* 폰 칸을 가득 쓰되, 비율은 유지 */
+.lower-grid .pane:last-child{
+  justify-content: center;
+}
+/* lower-grid를 2:1 비율로 고정 */
+.lower-grid{
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  min-height: 0;
+  width: 100%;
+  padding: 12px 0 0;     /* padding 유지 (원하면 조절) */
+  max-height: clamp(26rem, 78dvh, 46rem);
+}
+
+.lower-grid .pane:first-child{  /* Output */
+  flex: 2 1 0;
+  min-width: 0;
+  display: flex;
+}
+
+.lower-grid .pane:last-child{   /* Phone */
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Output 카드가 세로로 꽉 차게 */
+.panel{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.panel-body{
+  flex: 1;
+  min-height: 0;
+}
+.output-box{
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Phone: pane 안에서 "fit" (넘치지 않게 최대) */
+.lower-grid .pane:last-child{
+  overflow: hidden;           /* 혹시 넘치면 잘라내기(안전장치) */
+}
+
+.phone-shell{
+  width: 100%;
+  height: 100%;
+  /*aspect-ratio: 9 / 19.5;*/
+
+  /* ✅ 핵심: 칸 안에서 가장 크게 "맞춰서" */
+  max-width: 100%;
+  max-height: 100%;
+
+  /* height 기준으로 커지면서 width가 넘치는 걸 방지 */
+  justify-self: center;
+  align-self: center;
+}
+
+
+.section-divider{
+  height: 3px;
+  width: 100%;
+  margin: 14px 0 18px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #22c55e,
+    #16a34a,
+    #22c55e,
+    transparent
+  );
+  border-radius: 999px;
+  opacity: 0.9;
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>EasyAndro</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../frontend/style.css" />
+  </head>
+  <body>
+    <div class="main-layout">
+      <!-- Left Sidebar -->
+      <aside class="side-menu">
+        <div class="brand">
+          <div class="brand-dot"></div>
+          <div class="brand-text">
+            <div class="brand-title">EasyAndro</div>
+            <div class="brand-sub">Android Security Toolkit</div>
+          </div>
+        </div>
+  
+        <div class="menu-group">
+          <button class="menu-btn primary" onclick="connectAdb()">Connect ADB</button>
+          <!--<button class="menu-btn" onclick="runtimeInjection()" id="btn-ri">Runtime Injection</button>-->
+          <button class="menu-btn" onclick="rooting()" id="btn-r">Simulating Root</button>
+          <button class="menu-btn" onclick="tampering()" id="btn-t">Tampering APK</button>
+          <!--<button class="menu-btn" onclick="pinning()" id="btn-p">Pinning</button>-->
+        </div>
+      </aside>
+  
+      <!-- Main Content -->
+      <main class="content-area">
+        <div class="center-container">
+       <!--<h1>A u t o D C</h1>-->
+
+      <!-- Device and App Select -->
+      <div class="form-section">
+        <div>
+          <label class="form-label" >🔌 Selected Device</label><br />
+          <select class="form-select" id="device-select" disabled>
+            <option>No device connected</option>
+          </select>
+          
+        </div>
+        <div>
+          <label class="form-label">🌏 Proxy IP</label><br />
+            <input
+              type="text"
+              class="form-control"
+              id="proxy-ip"
+              placeholder="e.g., 192.168.x.y"
+            />
+        </div>
+        <div>
+          <label class="form-label">📱 Select App</label><br />
+          <select class="form-select" id="app-select" onchange="UploadAPK()">
+            <option>Select application</option>
+          </select>
+        </div>
+        
+      </div>
+      <div class="section-divider"></div>
+      <!-- Main Layout -->
+      <div class="lower-grid">
+
+        <!-- LEFT: Output Card -->
+        <div class="pane">
+          <div class="panel">
+            <div class="panel-header">
+              <span class="status-dot"></span>
+              <span class="panel-title">Output</span>
+            </div>
+            <div class="panel-body">
+              <div class="output-box" id="outputBox">Output will appear here...</div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- RIGHT: Phone Screen -->
+        <div class="pane">
+          <div class="phone-shell">
+            <div class="phone-top">
+              <div class="phone-camera"></div>
+            </div>
+      
+            <div class="phone-screen">
+              <img id="phoneShot" class="phone-shot" alt="phone screen" />
+              <div class="phone-placeholder" id="phonePlaceholder">No device connected</div>
+            </div>
+      
+            <div class="phone-bottom">
+              <div class="home-indicator"></div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+
+      
+
+
+    <script
+      type="module"
+      src="{{ url_for('static', filename='script.js') }}"
+    ></script>
+    <pre id="log"></pre>
+  </body>
+</html>
