@@ -1,2 +1,0 @@
-Contains subcommands to work with the current working directory
-on the device.
