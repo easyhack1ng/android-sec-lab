@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/kali/Desktop/android-sec-lab/androDC/.venv
+set -gx VIRTUAL_ENV /home/kali/Desktop/android-sec-lab/EasyAndro/.venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

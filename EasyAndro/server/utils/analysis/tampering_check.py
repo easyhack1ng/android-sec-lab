@@ -48,7 +48,55 @@ def adb_su(cmd: str, timeout: int = 30) -> str:
 
 
 def read_maps(pid: str) -> str:
-    return adb_su(f"cat /proc/{pid}/maps | grep libfrida-gadget.so", timeout=30)
+    try:
+        return adb_su(f"cat /proc/{pid}/maps | grep libfrida-gadget.so", timeout=30)
+    except subprocess.CalledProcessError as e:
+        return e.output if e.output else str(e)
+    except Exception as e:
+        return str(e)
+        
+        
+def get_pid(package_name: str, timeout: int = 20) -> str | None:
+    end_time = time.time() + timeout
+
+    while time.time() < end_time:
+        result = subprocess.run(
+            ["adb", "shell", "pidof", package_name],
+            capture_output=True,
+            text=True
+        )
+        pid = result.stdout.strip()
+
+        if pid:
+            return pid.split()[0]
+
+        result = subprocess.run(
+            ["adb", "shell", "ps", "-A"],
+            capture_output=True,
+            text=True
+        )
+
+        for line in result.stdout.splitlines():
+            if package_name in line:
+                parts = line.split()
+                if len(parts) >= 2:
+                    for part in parts:
+                        if part.isdigit():
+                            return part
+
+        time.sleep(1)
+
+    return None
+
+def launch_app(package_name: str):
+    result = subprocess.run(
+        ["adb", "shell", "monkey", "-p", package_name, "-c", "android.intent.category.LAUNCHER", "1"],
+        capture_output=True,
+        text=True
+    )
+    add_log(result.stdout.strip())
+    if result.stderr.strip():
+        add_log(result.stderr.strip())
 
 def run_tampering_check(package_name, flutter_yn):
     try:
@@ -65,11 +113,27 @@ def run_tampering_check(package_name, flutter_yn):
         add_log(patch_process.stdout)
 
 
-        reinstall_apk(package_name, get_latest_apk_file("apk"))
-        time.sleep(15)
+        patched_apk = get_latest_apk_file("apk")
+        if not reinstall_apk(package_name, patched_apk):
+            add_log("❌ Reinstall failed")
+            return
 
+	# 3. Launch app
+        launch_app(package_name)
+        time.sleep(5)
+        
+        # 4. Find PID
+        pid = get_pid(package_name, timeout=20)
+        if not pid:
+            add_log(f"❌ Could not find PID for package: {package_name}")
+            add_log("Try checking manually with:")
+            add_log(f"adb shell pidof {package_name}")
+            add_log(f"adb shell ps -A | grep {package_name}")
+            return
 
-        # 2. Check frida Library Injection
+        add_log(f"✅ Found PID: {pid}")
+        
+        # 5. Check frida Library Injection
         
         check_command = f"cat /proc/{pid}/maps | grep libfrida-gadget.so"
         add_log(f"\n $ adb shell su -c '{check_command}'")
@@ -88,7 +152,7 @@ def run_tampering_check(package_name, flutter_yn):
 
         time.sleep(1)
 
-        # 3. Screenshot
+        # 6. Screenshot
         add_log("🚨 Turn on the screen, will take a screenshot")
         time.sleep(10)
         screenshot_path = "tampering_test_" + package_name

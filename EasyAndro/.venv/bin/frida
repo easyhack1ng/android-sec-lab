@@ -1,4 +1,4 @@
-#!/home/kali/Desktop/android-sec-lab/androDC/.venv/bin/python
+#!/home/kali/Desktop/android-sec-lab/EasyAndro/.venv/bin/python
 import sys
 from frida_tools.repl import main
 if __name__ == '__main__':

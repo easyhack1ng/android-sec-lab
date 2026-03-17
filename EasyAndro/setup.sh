@@ -170,7 +170,10 @@ fi
 "$VENV_DIR/bin/python" -m pip install --upgrade pip wheel setuptools
 if [ -f "$REQUIREMENTS_FILE" ]; then
   log "Installing from $REQUIREMENTS_FILE..."
-  "$VENV_DIR/bin/python" -m pip install -r "$REQUIREMENTS_FILE"
+  "$VENV_DIR/bin/python" -m pip install -r requirements.txt
+  "$VENV_DIR/bin/python" -m pip install frida==16.1.4
+  "$VENV_DIR/bin/python" -m pip install frida-tools==12.3.0
+  echo "$VENV_DIR/bin/python -m pip install -r requirements.txt"
 else
   err "$REQUIREMENTS_FILE not found. Add it or set REQUIREMENTS_FILE env var."
   exit 1

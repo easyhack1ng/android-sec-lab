@@ -1,6 +1,6 @@
 flask
 frida==16.1.4
-frida-tools
+frida-tools==12.3.0
 reflutter
 pexpect
 objection

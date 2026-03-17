@@ -29,14 +29,9 @@ def run_pinning_bypass(package_name):
     try:
         list_adb_devices()
         print(f"[*] Starting objection for {package_name} (no adb launch)")
-        process = subprocess.Popen(
-            ["frida", "-U", "-f", package_name, "-l", "./static/tools/frida-multiple-unpinning.js"],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            bufsize=1
-        )
+        add_log("[DEBUG] before Popen")
+        process = subprocess.Popen(["frida", "-U", "-f", package_name, "-l", "./static/tools/frida-multiple-unpinning.js"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
+        add_log("[DEBUG] after Popen")
         add_log(f"\n $ frida -U -f {package_name} --codeshare akabe1/frida-multiple-unpinning")
         output_lines = []
         devices = frida.get_device_manager().enumerate_devices()
@@ -61,7 +56,6 @@ def run_pinning_bypass(package_name):
         return False, "Objection command timeout"
     except Exception as e:
         return False, f"Error: {str(e)}"
-
 
 
 
