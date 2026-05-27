@@ -6,8 +6,8 @@ git clone https://github.com/easyhack1ng/android-sec-lab.git
 cd android-sec-lab/EasyAndro/
 sudo ./setup.sh
 ```
+[![Demo](썸네일.png)]([https://youtube.com/링크](https://youtu.be/Haw-PX72s5s?si=wb3XOdISgX6GpRbH)
 
-[![Watch the video]](https://youtu.be/Haw-PX72s5s?si=wb3XOdISgX6GpRbH)
 ## Happy hacking!
 
 
