@@ -7,6 +7,7 @@ cd android-sec-lab/EasyAndro/
 sudo ./setup.sh
 ```
 
+[![Watch the video]](https://youtu.be/Haw-PX72s5s?si=wb3XOdISgX6GpRbH)
 ## Happy hacking!
 
 
